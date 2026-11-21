@@ -1,0 +1,48 @@
+{
+  "name": "shrink-image",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Fast, client-side browser image compression, auto-resizing, and modern WebP conversion. Reduces 15MB phone uploads to under 300KB before uploading to your server or S3.",
+  "author": "Mayuri Phad <mayuriphad656@gmail.com>",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test test/*.test.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "image-compression",
+    "image-resize",
+    "compress",
+    "webp",
+    "browser",
+    "client-side",
+    "react",
+    "angular",
+    "canvas",
+    "upload",
+    "s3"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mayuriphad/shrink-image.git"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
