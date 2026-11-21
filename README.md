@@ -1,6 +1,6 @@
 # shrink-image 🖼️
 
-> Fast, client-side browser image compression and auto-resizing. Reduces 15MB phone camera uploads to under 300KB WebP files before uploading to your server or AWS S3.
+> Fast, client-side browser image compression and auto-resizing. Shrinks 15MB phone camera photos to a size you choose (for example 300KB) before uploading to your server or AWS S3.
 
 [![npm version](https://img.shields.io/npm/v/shrink-image.svg)](https://www.npmjs.com/package/shrink-image)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -99,10 +99,14 @@ export function AvatarUploader() {
 
 | Option | Type | Default | Description |
 | :--- | :---: | :---: | :--- |
-| `maxSizeMB` | `number` | `1.0` | Target maximum size in MB. The algorithm iteratively optimizes quality to fit. |
+| `maxSizeMB` | `number` | `1.0` | Target maximum size in MB. Quality is lowered first, then the image is scaled down until it fits. |
 | `maxWidthOrHeight` | `number` | `1920` | Maximum pixel width or height. Maintains original aspect ratio. |
 | `initialQuality` | `number` | `0.8` | Initial compression quality from `0.1` to `1.0`. |
-| `outputType` | `string` | `'image/webp'` | Target format: `'image/webp'`, `'image/jpeg'`, or `'image/png'`. |
+| `minQuality` | `number` | `0.5` | Lowest quality tried before the image is scaled down instead. |
+| `minWidthOrHeight` | `number` | `320` | Smallest width or height used while fitting `maxSizeMB`. If the image still doesn't fit at this size, the smallest result is returned. |
+| `outputType` | `string` | `'image/webp'` | Target format: `'image/webp'`, `'image/jpeg'`, or `'image/png'`. Browsers that cannot encode WebP get JPEG; check `file.type`. PNG ignores quality, so it is only scaled down. |
+| `backgroundColor` | `string` | `'#ffffff'` | Fill for transparent areas in JPEG output. |
+| `keepSmallerOriginal` | `boolean` | `true` | Return the input file unchanged when it already fits both limits and compressing would make it larger. |
 | `onProgress` | `(p) => void` | `undefined` | Callback receiving progress from `0` to `100`. |
 
 ---
